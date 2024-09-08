@@ -8,6 +8,7 @@ import com.kripto.android.databinding.FragmentHomeBinding
 import com.kripto.android.ui.home.adapter.AppsAdapter
 import com.kripto.android.ui.home.viewmodel.HomeViewModel
 import com.kripto.android.utils.BaseFragment
+import com.kripto.android.utils.hide
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -18,10 +19,15 @@ class HomeFragment: BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infla
     private var appsAdapter: AppsAdapter? = null
 
     override fun setupBinding() = with(binding) {
+        toolbar.btnBack.hide()
+        toolbar.btnDelete.hide()
+        toolbar.tvTitle.text = "Lista de Apps"
+
         appsAdapter = AppsAdapter { app ->
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAppDetailFragment(app))
         }
         rvApps.layoutManager = LinearLayoutManager(requireContext())
+        rvApps.setHasFixedSize(true)
         rvApps.adapter = appsAdapter
 
         btnAddApp.setOnClickListener {
@@ -34,7 +40,7 @@ class HomeFragment: BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infla
 
     override fun setupObservers() {
         viewModel.apps.observe(viewLifecycleOwner) { applications ->
-            appsAdapter?.addAll(applications)  // Trabajar directamente con Application
+            appsAdapter?.submitList(applications)  // Trabajar directamente con Application
             binding.btnSeeRecomendations.isVisible = applications.isNotEmpty()
         }
     }

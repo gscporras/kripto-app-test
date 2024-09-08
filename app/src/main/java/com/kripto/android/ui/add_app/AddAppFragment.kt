@@ -14,6 +14,7 @@ import com.kripto.android.ui.add_app.viewmodel.AddAppState
 import com.kripto.android.ui.add_app.viewmodel.AddAppViewModel
 import com.kripto.android.ui.main.MainActivity
 import com.kripto.android.utils.BaseFragment
+import com.kripto.android.utils.hide
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,8 +25,15 @@ class AddAppFragment : BaseFragment<FragmentAddAppBinding>(FragmentAddAppBinding
     private var selectedFrequency = ""
     private var selectedStatus = ""
 
+    private val frequencyList = listOf("diaria", "semanal", "mensual")
+    private val statusList = listOf("activo", "obsoleto")
+
     override fun setupBinding() = with(binding) {
-        val frequencyList = listOf("diaria", "semanal", "mensual")
+        toolbar.btnBack.setOnClickListener { findNavController().popBackStack() }
+        toolbar.tvTitle.text = "Agregar app"
+        toolbar.btnDelete.hide()
+
+
         spinnerFrequency.adapter = FrequencyAdapter(requireContext(), frequencyList)
         spinnerFrequency.onItemSelectedListener = object : OnItemSelectedListener {
             override fun onItemSelected(
@@ -34,8 +42,8 @@ class AddAppFragment : BaseFragment<FragmentAddAppBinding>(FragmentAddAppBinding
                 position: Int,
                 id: Long
             ) {
-                selectedFrequency = if (position != AdapterView.INVALID_POSITION) {
-                    frequencyList[position]
+                selectedFrequency = if (position != 0) {
+                    frequencyList[position - 1]
                 } else ""
             }
 
@@ -44,7 +52,6 @@ class AddAppFragment : BaseFragment<FragmentAddAppBinding>(FragmentAddAppBinding
             }
         }
 
-        val statusList = listOf("activo", "obsoleto")
         spinnerStatus.adapter = StatusAdapter(requireContext(), statusList)
         spinnerStatus.onItemSelectedListener = object : OnItemSelectedListener {
             override fun onItemSelected(
@@ -53,8 +60,8 @@ class AddAppFragment : BaseFragment<FragmentAddAppBinding>(FragmentAddAppBinding
                 position: Int,
                 id: Long
             ) {
-                selectedStatus = if (position != AdapterView.INVALID_POSITION) {
-                    statusList[position]
+                selectedStatus = if (position != 0) {
+                    statusList[position - 1]
                 } else ""
             }
 

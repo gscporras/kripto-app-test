@@ -21,10 +21,9 @@ class AppDetailFragment :
 
     override fun setupBinding() = with(binding) {
         toolbar.btnBack.setOnClickListener { findNavController().popBackStack() }
-        toolbar.tvTitle.hide()
+        toolbar.tvTitle.text = args.app.name
         toolbar.btnDelete.setOnClickListener { viewModel.deleteApp(args.app.id) }
 
-        textView.text = args.app.name
         tvCpuUsage.text = "${args.app.cpuUsage}%"
         tvMemoryUsage.text = "${args.app.memoryUsage}%"
         tvUsageFrequency.text = args.app.usageFrequency
