@@ -9,7 +9,7 @@ class AppUseCase @Inject constructor(
     private val repository: AppRepository
 ) {
 
-    suspend fun getApps() = repository.getApps()
+    fun getApps(): LiveData<List<Application>> = repository.getApps()
     suspend fun getRecommendations(): List<String> {
         val recommendations = mutableListOf<String>()
 
@@ -38,6 +38,7 @@ class AppUseCase @Inject constructor(
 
         return recommendations
     }
+
     suspend fun addApp(app: Application) = repository.saveApp(app)
     suspend fun deleteApp(appId: Int) = repository.deleteApp(appId)
 }

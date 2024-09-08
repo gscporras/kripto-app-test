@@ -1,5 +1,7 @@
 package com.kripto.android.data
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.map
 import com.kripto.android.data.database.dao.AppDao
 import com.kripto.android.data.database.entities.toDatabase
 import com.kripto.android.domain.model.Application
@@ -10,7 +12,9 @@ class AppRepository @Inject constructor(
     private val appDao: AppDao
 ) {
 
-    suspend fun getApps() = appDao.getAllApps()?.map { it.toDomain() } ?: emptyList()
+    fun getApps(): LiveData<List<Application>> = appDao.getAllApps().map { entities ->
+        entities.map { it.toDomain() }
+    }
 
     suspend fun getObsoleteApps() = appDao.getObsoleteApps()?.map { it.toDomain() } ?: emptyList()
     suspend fun getUnderutilizedApps() =

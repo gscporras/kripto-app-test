@@ -1,5 +1,6 @@
 package com.kripto.android.data.database.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -10,7 +11,7 @@ import com.kripto.android.data.database.entities.AppEntity
 interface AppDao {
 
     @Query("SELECT * FROM app_table")
-    suspend fun getAllApps(): List<AppEntity>?
+    fun getAllApps(): LiveData<List<AppEntity>>
 
     @Query("SELECT * FROM app_table WHERE status = 'obsoleto'")
     suspend fun getObsoleteApps(): List<AppEntity>?

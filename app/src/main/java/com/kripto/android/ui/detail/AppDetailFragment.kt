@@ -9,6 +9,7 @@ import com.kripto.android.ui.detail.viewmodel.AppDetailState
 import com.kripto.android.ui.detail.viewmodel.AppDetailViewModel
 import com.kripto.android.ui.main.MainActivity
 import com.kripto.android.utils.BaseFragment
+import com.kripto.android.utils.hide
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -19,8 +20,9 @@ class AppDetailFragment :
     private val args: AppDetailFragmentArgs by navArgs()
 
     override fun setupBinding() = with(binding) {
-        btnBack.setOnClickListener { findNavController().popBackStack() }
-        btnDelete.setOnClickListener { viewModel.deleteApp(args.app.id) }
+        toolbar.btnBack.setOnClickListener { findNavController().popBackStack() }
+        toolbar.tvTitle.hide()
+        toolbar.btnDelete.setOnClickListener { viewModel.deleteApp(args.app.id) }
 
         textView.text = args.app.name
         tvCpuUsage.text = "${args.app.cpuUsage}%"
@@ -42,14 +44,17 @@ class AppDetailFragment :
             AppDetailState.Loading -> {
                 (requireActivity() as MainActivity).showLoading()
             }
+
             is AppDetailState.Success -> {
                 (requireActivity() as MainActivity).hideLoading()
                 findNavController().popBackStack()
             }
+
             is AppDetailState.Fail -> {
                 (requireActivity() as MainActivity).hideLoading()
                 Toast.makeText(requireContext(), state.message, Toast.LENGTH_SHORT).show()
             }
+
             else -> {
                 (requireActivity() as MainActivity).hideLoading()
             }

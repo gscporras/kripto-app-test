@@ -16,27 +16,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val appUseCase: AppUseCase
+    appUseCase: AppUseCase
 ) : ViewModel() {
 
-    private val _state = MutableLiveData<HomeState>(HomeState.Idle)
-    val state: LiveData<HomeState> = _state
-
-    fun getApps() = viewModelScope.launch(Dispatchers.IO) {
-        runCatching {
-            _state.postValue(HomeState.Loading)
-            appUseCase.getApps()
-        }.onSuccess { apps ->
-            _state.postValue(HomeState.Success(apps))
-        }.onFailure {
-            _state.postValue(HomeState.Fail(it.message ?: "Ha ocurrido un error"))
-        }
-    }
-}
-
-sealed class HomeState {
-    data object Idle : HomeState()
-    data object Loading : HomeState()
-    data class Fail(val message: String) : HomeState()
-    data class Success(val list: List<Application>) : HomeState()
+    val apps: LiveData<List<Application>> = appUseCase.getApps()
 }
