@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:contentInsetStart="8dp"
+        android:contentInsetEnd="8dp"
+        android:elevation="20dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/btn_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?selectableItemBackgroundBorderless"
+                android:padding="8dp"
+                android:src="@drawable/ic_arrow_left"
+                app:tint="@color/neutral_800" />
+
+            <ImageButton
+                android:id="@+id/btn_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:background="?selectableItemBackgroundBorderless"
+                android:padding="8dp"
+                android:src="@drawable/ic_delete"
+                app:tint="@color/neutral_800" />
+
+        </RelativeLayout>
+
+    </Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans_bold"
+            android:gravity="center"
+            android:paddingVertical="16dp"
+            android:textColor="@color/neutral_800"
+            android:textSize="20sp"
+            tools:text="@tools:sample/lorem" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans_bold"
+            android:paddingVertical="8dp"
+            android:text="Características:"
+            android:textColor="@color/neutral_800"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/open_sans_bold"
+                android:paddingVertical="8dp"
+                android:text="Uso de CPU:"
+                android:textColor="@color/neutral_800"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_cpuUsage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans_regular"
+                android:gravity="end"
+                android:paddingVertical="8dp"
+                android:textColor="@color/neutral_800"
+                android:textSize="14sp"
+                tools:text="25.8%" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/open_sans_bold"
+                android:paddingVertical="8dp"
+                android:text="Uso de memoria:"
+                android:textColor="@color/neutral_800"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_memoryUsage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans_regular"
+                android:gravity="end"
+                android:paddingVertical="8dp"
+                android:textColor="@color/neutral_800"
+                android:textSize="14sp"
+                tools:text="50.8%" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/open_sans_bold"
+                android:paddingVertical="8dp"
+                android:text="Frecuencia de uso:"
+                android:textColor="@color/neutral_800"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_usageFrequency"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans_regular"
+                android:gravity="end"
+                android:paddingVertical="8dp"
+                android:textColor="@color/neutral_800"
+                android:textSize="14sp"
+                tools:text="diaria" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/open_sans_bold"
+                android:paddingVertical="8dp"
+                android:text="Status:"
+                android:textColor="@color/neutral_800"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_status"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans_regular"
+                android:gravity="end"
+                android:paddingVertical="8dp"
+                android:textColor="@color/neutral_800"
+                android:textSize="14sp"
+                tools:text="activo" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/open_sans_bold"
+                android:paddingVertical="8dp"
+                android:text="Funcionalidad:"
+                android:textColor="@color/neutral_800"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_functionality"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans_regular"
+                android:gravity="end"
+                android:paddingVertical="8dp"
+                android:textColor="@color/neutral_800"
+                android:textSize="14sp"
+                tools:text="mensajes" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/open_sans_bold"
+                android:paddingVertical="8dp"
+                android:text="Cantidad de usuarios:"
+                android:textColor="@color/neutral_800"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_userCount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans_regular"
+                android:gravity="end"
+                android:paddingVertical="8dp"
+                android:textColor="@color/neutral_800"
+                android:textSize="14sp"
+                tools:text="128" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

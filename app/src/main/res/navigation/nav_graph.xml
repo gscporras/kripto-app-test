@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.kripto.android.ui.home.HomeFragment"
+        android:label="HomeFragment"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_addAppFragment"
+            app:destination="@id/addAppFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_recommendedFragment"
+            app:destination="@id/recommendedFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_appDetailFragment"
+            app:destination="@id/appDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/addAppFragment"
+        android:name="com.kripto.android.ui.add_app.AddAppFragment"
+        android:label="AddAppFragment"
+        tools:layout="@layout/fragment_add_app" />
+    <fragment
+        android:id="@+id/recommendedFragment"
+        android:name="com.kripto.android.ui.recommended.RecommendedFragment"
+        android:label="RecommendedFragment"
+        tools:layout="@layout/fragment_recommended" />
+    <fragment
+        android:id="@+id/appDetailFragment"
+        android:name="com.kripto.android.ui.detail.AppDetailFragment"
+        android:label="AppDetailFragment"
+        tools:layout="@layout/fragment_app_detail">
+
+        <argument
+            android:name="app"
+            app:argType="com.kripto.android.domain.model.Application" />
+
+    </fragment>
+</navigation>
