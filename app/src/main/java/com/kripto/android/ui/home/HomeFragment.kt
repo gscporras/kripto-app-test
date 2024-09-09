@@ -1,6 +1,8 @@
 package com.kripto.android.ui.home
 
 import androidx.core.view.isVisible
+import androidx.core.widget.doAfterTextChanged
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,25 +14,32 @@ import com.kripto.android.utils.hide
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeFragment: BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
+class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
 
     private val viewModel: HomeViewModel by viewModels()
 
     private var appsAdapter: AppsAdapter? = null
 
     override fun setupBinding() = with(binding) {
-        toolbar.btnBack.hide()
-        toolbar.btnDelete.hide()
-        toolbar.tvTitle.text = "Lista de Apps"
-
         appsAdapter = AppsAdapter { app ->
-            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAppDetailFragment(app))
+            findNavController().navigate(
+                HomeFragmentDirections.actionHomeFragmentToAppDetailFragment(
+                    app
+                )
+            )
         }
         rvApps.layoutManager = LinearLayoutManager(requireContext())
         rvApps.setHasFixedSize(true)
         rvApps.adapter = appsAdapter
 
-        btnAddApp.setOnClickListener {
+        etSearch.doAfterTextChanged {
+            val query = it.toString().trim()
+            appsAdapter?.filter(query)
+            btnClose.isVisible = query.isNotEmpty()
+            btnClose.setOnClickListener { etSearch.text?.clear() }
+        }
+
+        btnAdd.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAddAppFragment())
         }
         btnSeeRecomendations.setOnClickListener {
@@ -42,6 +51,8 @@ class HomeFragment: BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infla
         viewModel.apps.observe(viewLifecycleOwner) { applications ->
             appsAdapter?.submitList(applications)  // Trabajar directamente con Application
             binding.btnSeeRecomendations.isVisible = applications.isNotEmpty()
+            binding.llSearch.isVisible = applications.isNotEmpty()
+            binding.tvEmpty.isVisible = applications.isEmpty()
         }
     }
 }

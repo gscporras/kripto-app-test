@@ -22,6 +22,24 @@ class AppsAdapter(
         holder.bind(getItem(position))
     }
 
+    private var fullList = listOf<Application>()
+
+    override fun submitList(list: List<Application>?) {
+        if (fullList.isEmpty()) {
+            fullList = list ?: emptyList()
+        }
+        super.submitList(list)
+    }
+
+    fun filter(query: String) {
+        val filteredList = if (query.isEmpty()) {
+            fullList  // Restaurar lista completa cuando la búsqueda esté vacía
+        } else {
+            fullList.filter { it.name.contains(query, ignoreCase = true) }
+        }
+        super.submitList(filteredList)
+    }
+
     inner class AppViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         private val binding = ItemAppBinding.bind(view)
